@@ -20,6 +20,10 @@ interface Arguments {
   c?: boolean
   verbose?: boolean
   v?: boolean
+  parallel?: boolean
+  p?: boolean
+  "max-concurrency"?: number
+  j?: number
 }
 
 yargs(hideBin(process.argv))
@@ -35,6 +39,8 @@ yargs(hideBin(process.argv))
         force: argv.force || argv.f,
         clean: argv.clean || argv.c,
         verbose: argv.verbose || argv.v,
+        parallel: argv.parallel || argv.p,
+        maxConcurrency: argv["max-concurrency"] || argv.j || 1,
       })
   )
   .command(
@@ -90,5 +96,17 @@ yargs(hideBin(process.argv))
     description: "Show detailed output",
     default: false,
     type: "boolean",
+  })
+  .option("p", {
+    alias: ["parallel"],
+    description: "Enable parallel processing",
+    default: false,
+    type: "boolean",
+  })
+  .option("j", {
+    alias: ["max-concurrency"],
+    description: "Maximum concurrency for parallel processing",
+    default: 1,
+    type: "number",
   })
   .parse()

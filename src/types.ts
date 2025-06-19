@@ -24,6 +24,8 @@ export interface InstallOptions {
   force?: boolean;
   clean?: boolean;
   verbose?: boolean;
+  parallel?: boolean;
+  maxConcurrency?: number;
 }
 
 export interface ChangeMetadata {
